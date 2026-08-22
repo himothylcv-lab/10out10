@@ -491,7 +491,7 @@ canvas{display:none}
   /* Until the token exists there is nothing to swap, so Buy scrolls to the
      instructions rather than dumping someone on an empty Uniswap page. */
   if(ca) document.getElementById("buyBtn").href=
-    "https://app.uniswap.org/swap?chain=base&outputCurrency="+ca;
+    "https://aerodrome.finance/swap?from=eth&to="+ca;
 
   document.getElementById("postBtn").addEventListener("click",function(e){
     e.preventDefault();
