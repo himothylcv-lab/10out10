@@ -253,7 +253,7 @@ canvas{display:none}
       <div class="step"><span class="n">2</span>
         <p>Get <strong>ETH on Base</strong>. Coinbase withdraws straight to Base.</p></div>
       <div class="step"><span class="n">3</span>
-        <p>Open <strong>Aerodrome</strong> or <strong>Uniswap</strong> and paste the address.</p></div>
+        <p>Open <strong>Uniswap</strong> and paste the address.</p></div>
       <div class="step"><span class="n">4</span>
         <p>Swap. Then go post 10/10.</p></div>
     </div>
@@ -491,7 +491,7 @@ canvas{display:none}
   /* Until the token exists there is nothing to swap, so Buy scrolls to the
      instructions rather than dumping someone on an empty Uniswap page. */
   if(ca) document.getElementById("buyBtn").href=
-    "https://aerodrome.finance/swap?from=eth&to="+ca;
+    "https://app.uniswap.org/swap?chain=base&outputCurrency="+ca;
 
   document.getElementById("postBtn").addEventListener("click",function(e){
     e.preventDefault();
