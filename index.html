@@ -183,7 +183,7 @@
     </svg>
     <div>
       <h1 class="wordmark">10 out of 10</h1>
-      <div class="ticker" id="tickerLine">$10/10 &middot; SOLANA</div>
+      <div class="ticker" id="tickerLine">$10/10 &middot; BASE</div>
     </div>
   </header>
 
@@ -237,9 +237,9 @@
       <div>
         <div class="eyebrow" style="margin-bottom:15px">Four steps</div>
         <ol>
-          <li><b>01</b><span>Install <strong>Phantom</strong> or <strong>Solflare</strong>.</span></li>
-          <li><b>02</b><span>Fund it with SOL from any exchange.</span></li>
-          <li><b>03</b><span>Open pump.fun or Jupiter, paste the address below.</span></li>
+          <li><b>01</b><span>Install <strong>Coinbase Wallet</strong>, <strong>Rainbow</strong> or <strong>MetaMask</strong>.</span></li>
+          <li><b>02</b><span>Bridge or buy <strong>ETH on Base</strong> &mdash; Coinbase sends straight to Base.</span></li>
+          <li><b>03</b><span>Open <strong>Uniswap</strong> or <strong>Aerodrome</strong>, paste the address below.</span></li>
           <li><b>04</b><span>Swap. Rate it yourself.</span></li>
         </ol>
         <div class="ca">
@@ -257,7 +257,7 @@
         <a href="#" id="lx" rel="noopener">X</a>
         <a href="#" id="ltg" rel="noopener">Telegram</a>
         <a href="#" id="lds" rel="noopener">DEX Screener</a>
-        <a href="#" id="lpf" rel="noopener">pump.fun</a>
+        <a href="#" id="lpf" rel="noopener">Basescan</a>
       </div>
     </div>
   </section>
@@ -292,7 +292,7 @@
     "the airdrop went to people who sell airdrops",
     "the KOL posted it after his own entry",
     "the leaderboard is just whoever burned the most",
-    "it graduated and immediately went sideways"
+    "it hit the DEX and immediately went sideways"
   ];
   /* =========================================== */
 
@@ -372,7 +372,7 @@
     "the dev replied in the group and it was obviously ChatGPT",
     "the whitepaper is a Google Doc with the comments still on",
     "the community manager is the dev with a different profile picture",
-    "it graduated and immediately learned nothing"
+    "it hit the DEX and immediately learned nothing"
   ];
 
   /* Formats. Each returns {plain, html}. Keeping them structurally different
@@ -611,10 +611,10 @@
 
   /* ---- config ---- */
   var ca = CONFIG.contract.trim();
-  document.getElementById("tickerLine").textContent = CONFIG.ticker + " · SOLANA";
+  document.getElementById("tickerLine").textContent = CONFIG.ticker + " · BASE";
   document.getElementById("ca").textContent = ca || "CONTRACT ADDRESS — PASTE AFTER LAUNCH";
-  document.getElementById("lds").href = ca ? "https://dexscreener.com/solana/"+ca : "https://dexscreener.com/solana";
-  document.getElementById("lpf").href = ca ? "https://pump.fun/coin/"+ca : "https://pump.fun";
+  document.getElementById("lds").href = ca ? "https://dexscreener.com/base/"+ca : "https://dexscreener.com/base";
+  document.getElementById("lpf").href = ca ? "https://basescan.org/token/"+ca : "https://basescan.org";
   document.getElementById("lx").href  = CONFIG.x;
   document.getElementById("ltg").href = CONFIG.telegram;
 
