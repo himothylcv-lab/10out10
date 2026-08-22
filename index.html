@@ -493,10 +493,21 @@ canvas{display:none}
   if(ca) document.getElementById("buyBtn").href=
     "https://app.uniswap.org/swap?chain=base&outputCurrency="+ca;
 
+  /* The hero Post button used to open the same fixed text every time, so a
+     timeline full of them looked like one bot. It now draws a fresh rating in a
+     random format, independent of whatever is on screen — two people clicking
+     it get different posts. */
+  var POST_FORMATS = ["verdict","still","notes","oneword","ser"];
+  function randomPost(){
+    var keepFmt = fmt, keepLast = last;
+    fmt = pick(POST_FORMATS);
+    var line = build(null).plain;
+    fmt = keepFmt; last = keepLast;      // don't disturb what the page is showing
+    return line + "\n\n$10/10 on Base\n" + CONFIG.site;
+  }
   document.getElementById("postBtn").addEventListener("click",function(e){
     e.preventDefault();
-    window.open(intent("Everything is 10/10\n\n$10/10 on Base\n"+CONFIG.site),
-                "_blank","noopener");
+    window.open(intent(randomPost()),"_blank","noopener");
   });
   document.getElementById("postLine").addEventListener("click",function(e){
     e.preventDefault();
