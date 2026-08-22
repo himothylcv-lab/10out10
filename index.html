@@ -72,6 +72,7 @@ h1,h2{margin:0;font-weight:400;text-wrap:balance}
 .rate .score{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;
              color:var(--amber);letter-spacing:-.02em}
 .rate .but{color:var(--white);opacity:.82}
+.rate .word{font-weight:700;letter-spacing:.01em}
 .rate w{display:inline-block;opacity:0;
         animation:word .34s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes word{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -168,7 +169,7 @@ canvas{display:none}
   </div>
 
   <div class="inner">
-    <h1 class="huge">Everything gets<br>a score.<br><b>This is the only 10.</b></h1>
+    <h1 class="huge">Everything is<br><b>10/10.</b><br>No exceptions.</h1>
 
     <p class="rate" id="rate" aria-live="polite"></p>
 
@@ -186,10 +187,10 @@ canvas{display:none}
     </div>
 
     <div class="chips" role="group" aria-label="Post format">
-      <button class="chip" data-fmt="review" aria-pressed="true">10/10</button>
-      <button class="chip" data-fmt="still" aria-pressed="false">still a 10</button>
-      <button class="chip" data-fmt="scale" aria-pressed="false">on a scale</button>
-      <button class="chip" data-fmt="but" aria-pressed="false">the but</button>
+      <button class="chip" data-fmt="verdict" aria-pressed="true">10/10</button>
+      <button class="chip" data-fmt="still" aria-pressed="false">still 10/10</button>
+      <button class="chip" data-fmt="notes" aria-pressed="false">no notes</button>
+      <button class="chip" data-fmt="oneword" aria-pressed="false">one word</button>
     </div>
   </div>
 </section>
@@ -266,110 +267,102 @@ canvas{display:none}
   ];
   /* =========================================== */
 
-  var PEOPLE = [
-    {n:"she", o:"her", v:"is", con:"She's", p:"she", P:"her", c:"she's"},
-    {n:"he",  o:"him", v:"is", con:"He's",  p:"he",  P:"his", c:"he's"}
-  ];
+  /* ---------------------------------------------------------------------
+     Checked against the live X feed: the phrase is SHORT, it goes at the END,
+     and there is no caveat clause. Nobody posts "she's a 10 but" any more.
 
-  var PERSON_BUTS = [
-    "{p} sold at 2x and watched it do 40 from the group chat",
-    "{p} calls it conviction, there's just no liquidity to sell into",
-    "{P} cost basis is a screenshot {p} cropped",
-    "{c} been in the group since launch and has never bought",
-    "{p} made 400k and posted a picture of a used car",
-    "{P} stop loss is asking the group what they think",
-    "{p} named the wallet 'exit liquidity' and aped anyway",
-    "{p} bought at 90k mcap and told everyone at 900k",
-    "{p} sold the bottom and bought it back higher, twice",
-    "{p} has forty tabs open and none of them are the chart",
-    "{c} the top holder and {c} in there asking wen moon",
-    "{p} moved it to a cold wallet and lost the seed phrase",
-    "{p} deleted the tweet but not the screenshot everyone took",
-    "{p} says 'few' about a coin with forty thousand holders",
-    "{P} portfolio is up and {P} net worth is down",
-    "{p} calls one tweet research and the tweet is {P} own",
-    "{p} shills it in public and sells it in private",
-    "{p} rounds every loss down to break-even out loud",
-    "{c} been calling the bottom since March and it's August",
-    "{p} texts you only when it's already up 60%",
-    "{p} explains the candle twenty minutes after it prints",
-    "{p} built a spreadsheet and still bought the top with it",
-    "{p} blocked everyone who asked about the dev wallet",
-    "{p} apes size {p} cannot explain at home",
-    "{p} thinks diamond hands is a strategy and not a symptom",
-    "{p} keeps a second account for the trades that worked",
-    "{p} farms an airdrop that has been two weeks away for a year",
-    "{p} bridged to the wrong chain and called it a learning experience"
-  ];
+     And the score never moves. Every single output is 10/10 — that is the
+     coin. Rating a rug 10/10 is the joke; scoring it 0/10 would just make this
+     a review site. In crypto people already type "10/10" when a chart rips,
+     so every post says the ticker for free.
+     --------------------------------------------------------------------- */
 
-  var THINGS = [
-    {n:"the call",v:"was"},{n:"the chart",v:"is"},{n:"your entry",v:"was"},
-    {n:"this launch",v:"is"},{n:"the alpha group",v:"is"},{n:"that candle",v:"was"},
-    {n:"the thesis",v:"was"},{n:"the airdrop",v:"was"},{n:"your exit",v:"was"},
-    {n:"the dev",v:"is"},{n:"the rebrand",v:"is"},{n:"this whole cycle",v:"is"},
-    {n:"the roadmap",v:"is"},{n:"this ticker",v:"is"},{n:"the deploy",v:"was"}
-  ];
-
-  var THING_BUTS = [
-    "the liquidity is four hundred dollars and one of them is mine",
-    "the top holder owns ninety percent and posts about decentralisation",
-    "the dev wallet moved while I was typing this",
-    "the volume is one wallet buying from itself politely",
-    "the LP was never locked and the dev keeps saying soon",
-    "the contract is still upgradeable and nobody wants to bring it up",
+  var SITUATIONS = [
+    "up 4x before lunch",
+    "chart went vertical out of nowhere",
+    "entry filled on the wick",
+    "made rent on a Tuesday",
+    "green candle, no news, no reason",
+    "called it and actually posted the entry",
+    "sold the top for once",
+    "bought it before the KOL did",
+    "still up after the dump",
+    "took profit and slept fine",
+    "the whole timeline is posting it",
+    "up on the day, down on the week",
+    "sideways for nine hours",
+    "bought the top again",
+    "sold at 2x and it did 40",
+    "aped it off one tweet",
+    "gas cost more than the position",
+    "bridged to the wrong chain",
+    "the dev wallet moved",
+    "liquidity is four hundred dollars",
+    "top holder owns ninety percent",
+    "rugged in nine minutes",
+    "the KOL posted it after his own entry",
+    "still holding from last cycle",
+    "up on paper and nowhere else",
+    "the audit was the dev's cousin",
     "bubblemaps looks like a family reunion",
-    "the CA in the pin has changed twice today",
-    "it did a hundred x on three thousand dollars of volume",
-    "every holder was funded by the same wallet nine minutes apart",
-    "it has been launching soon for five weeks",
-    "the telegram is nine hundred bots and one mod having a hard day",
-    "the audit was done by the dev's cousin, in Canva",
-    "the roadmap is a picture of a rocket and a question mark",
-    "the announcement was an announcement of an announcement",
-    "the floor is one guy who hasn't opened the app since June",
-    "the ticker was taken so they added an X and called it a rebrand",
-    "it rugged somewhere between the first and second sentence",
-    "the dev replied in the group and it was obviously ChatGPT",
-    "the whitepaper is a Google Doc with the comments still on",
-    "the community manager is the dev with a different profile picture",
-    "it hit the DEX and immediately learned nothing"
+    "deployed by tagging a bot on Farcaster",
+    "the whole float is the dev's mutuals",
+    "lost the seed phrase",
+    "the telegram is nine hundred bots and one mod",
+    "sold the bottom and bought it back higher"
   ];
+
+  /* TRENDING — the trend valve. Paste a new situation here when a meta
+     appears and it enters rotation immediately. Lowercase, no full stop. */
+  var TRENDING = [
+    "it's a Clanker deploy with a new picture",
+    "the airdrop went to people who sell airdrops",
+    "Base was up and everything else wasn't"
+  ];
+
+  /* Always positive — the score never moves, so the word never sours. */
+  var WORDS = ["BANGER","NO NOTES","PERFECT","FLAWLESS","CINEMA",
+               "MASTERPIECE","IMMACULATE","CHEF'S KISS"];
+
+  function sc(t){ return '<span class="score">'+(t||"10/10")+'</span>'; }
 
   var FORMATS = {
-    but:function(s,c){
-      var h,ph;
-      if(s.own){ph="Rating "+s.n;h='Rating <span class="subj">'+esc(s.n)+'</span>';}
-      else if(s.con){ph=s.con;h='<span class="subj">'+esc(s.con)+'</span>';}
-      else{ph=cap(s.n)+" "+s.v;h='<span class="subj">'+esc(cap(s.n))+'</span> '+esc(s.v);}
-      return {plain:ph+" a 10 but "+c+".",
-              html:h+' a <span class="score">10</span> but <span class="but">'+esc(c)+'</span>.'};
+    /* the dominant live shape: statement, then the score, full stop */
+    verdict:function(t){
+      return {plain:cap(t)+". 10/10",
+              html:'<span class="subj">'+esc(cap(t))+'</span>. '+sc()};
     },
-    review:function(s,c){
-      var t=cap(s.n);
-      return {plain:t+": 10/10. "+cap(c)+". Still 10/10.",
-              html:'<span class="subj">'+esc(t)+'</span>: <span class="score">10/10</span>. <br>'+
-                   '<span class="but">'+esc(cap(c))+'</span>. Still <span class="score">10/10</span>.'};
+    /* score plus one shouted word — the rating-list shape */
+    oneword:function(t){
+      var w=pick(WORDS);
+      return {plain:"10/10 "+w+". "+cap(t)+".",
+              html:sc()+' <span class="word">'+esc(w)+'</span>. '+
+                   '<span class="but">'+esc(cap(t))+'</span>.'};
     },
-    still:function(s,c){
-      var t=s.o||s.n;
-      return {plain:"Gave "+t+" a 10. Then "+c+". Still a 10.",
-              html:'Gave <span class="subj">'+esc(t)+'</span> a <span class="score">10</span>. Then '+
-                   '<span class="but">'+esc(c)+'</span>. Still a <span class="score">10</span>.'};
+    /* the punchline of the whole coin: the flaw changes nothing */
+    still:function(t){
+      return {plain:cap(t)+". Still 10/10.",
+              html:'<span class="subj">'+esc(cap(t))+'</span>. Still '+sc()+'.'};
     },
-    scale:function(s,c){
-      var h,ph;
-      if(s.own){ph="I'm giving "+s.n+" a 10";
-                h="I'm giving <span class=\"subj\">"+esc(s.n)+'</span> a <span class="score">10</span>';}
-      else{ph=s.n+" "+s.v+" a 10";
-           h='<span class="subj">'+esc(s.n)+'</span> '+esc(s.v)+' a <span class="score">10</span>';}
-      return {plain:"On a scale of 1 to 10, "+ph+". The 10 is doing a lot of work: "+c+".",
-              html:'On a scale of 1 to 10, '+h+'. The 10 is doing a lot of work: <span class="but">'+esc(c)+'</span>.'};
+    /* no caveat at all — the shortest possible post */
+    notes:function(t){
+      return {plain:cap(t)+". 10/10, no notes.",
+              html:'<span class="subj">'+esc(cap(t))+'</span>. '+sc()+', no notes.'};
     }
   };
 
+  function build(own){
+    if(own) return FORMATS[fmt](own);
+    var pool = SITUATIONS.concat(TRENDING);
+    var t = pick(pool), guard=0;
+    while(t===lastClause && guard++<12) t = pick(pool);
+    lastClause = t;
+    return FORMATS[fmt](t);
+  }
+
   var rateEl=document.getElementById("rate"), toastEl=document.getElementById("toast"),
       ownIn=document.getElementById("ownIn");
-  var fmt="review", current="", lastClause="";   /* score-first by default */
+  var fmt="verdict", current="", lastClause="";
   var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){
@@ -377,18 +370,6 @@ canvas{display:none}
   function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
 
-  function build(own){
-    var subject,clause,r=Math.random();
-    if(own){ subject={n:own,own:true};
-             clause=(r<0.28&&TRENDING.length)?pick(TRENDING):pick(THING_BUTS); }
-    else if(r<0.16&&TRENDING.length){ subject=pick(THINGS); clause=pick(TRENDING); }
-    else if(r<0.60){ var w=pick(PEOPLE); subject=w;
-      clause=pick(PERSON_BUTS).replace(/\{p\}/g,w.p).replace(/\{P\}/g,w.P).replace(/\{c\}/g,w.c); }
-    else { subject=pick(THINGS); clause=pick(THING_BUTS); }
-    if(clause===lastClause) return build(own);
-    lastClause=clause;
-    return FORMATS[fmt](subject,clause);
-  }
 
   /* words land in sequence; .score is skipped so the count-up can own it */
   function stagger(root){
@@ -459,12 +440,12 @@ canvas{display:none}
     for(var gx=0;gx<12;gx++){
       for(var gy=0;gy<7;gy++){
         var cx=70+gx*118+(rnd()*34-17), cy=64+gy*128+(rnd()*30-15);
-        var r=20+rnd()*16, n=1+Math.floor(rnd()*8);
+        var r=20+rnd()*16;
         out.push('<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="'+r.toFixed(1)+
                  '" fill="none" stroke="#fff" stroke-width="1.5"/>'+
                  '<text x="'+cx.toFixed(1)+'" y="'+(cy+r*0.35).toFixed(1)+
                  '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="'+
-                 (r*0.95).toFixed(1)+'" font-weight="300" fill="#fff" text-anchor="middle">'+n+'</text>');
+                 (r*0.62).toFixed(1)+'" font-weight="300" fill="#fff" text-anchor="middle">10/10</text>');
       }
     }
     svg.setAttribute("viewBox","0 0 "+W+" "+H);
