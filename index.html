@@ -66,8 +66,12 @@ h1,h2{margin:0;font-weight:400;text-wrap:balance}
 .rate{font-size:clamp(22px,4.2vw,50px);line-height:1.18;letter-spacing:-.025em;
       font-weight:300;min-height:2.6em;margin:0}
 .rate .subj{font-weight:700}
-.rate .score{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
-.rate .but{color:var(--amber)}
+/* The score carries the amber, not the deduction. The coin is named for the
+   10, so the 10 is what should catch the eye — colouring the flaw instead made
+   the page about the "but". */
+.rate .score{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;
+             color:var(--amber);letter-spacing:-.02em}
+.rate .but{color:var(--white);opacity:.82}
 .rate w{display:inline-block;opacity:0;
         animation:word .34s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes word{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -98,16 +102,6 @@ button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .chip:hover{transform:none;border-color:var(--white);color:var(--white);background:transparent}
 .chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);
                            color:var(--ink);font-weight:700}
-
-/* ---------- ticker ---------- */
-.strip{background:var(--ink);color:var(--white);overflow:hidden;padding:15px 0;
-       border-top:3px solid var(--amber);border-bottom:3px solid var(--amber)}
-.strip-inner{display:flex;width:max-content;animation:slide 120s linear infinite}
-.strip:hover .strip-inner{animation-play-state:paused}
-.strip span{font-size:15px;white-space:nowrap;padding:0 30px;opacity:.9}
-.strip b{font-weight:700}
-.strip i{font-style:normal;color:var(--amber)}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- statement ---------- */
 .statement{font-size:clamp(28px,5.6vw,72px);line-height:1.04;letter-spacing:-.04em;
@@ -192,15 +186,13 @@ canvas{display:none}
     </div>
 
     <div class="chips" role="group" aria-label="Post format">
-      <button class="chip" data-fmt="but" aria-pressed="true">the but</button>
-      <button class="chip" data-fmt="review" aria-pressed="false">review</button>
+      <button class="chip" data-fmt="review" aria-pressed="true">10/10</button>
       <button class="chip" data-fmt="still" aria-pressed="false">still a 10</button>
       <button class="chip" data-fmt="scale" aria-pressed="false">on a scale</button>
+      <button class="chip" data-fmt="but" aria-pressed="false">the but</button>
     </div>
   </div>
 </section>
-
-<div class="strip" aria-hidden="true"><div class="strip-inner" id="strip"></div></div>
 
 <section class="block block-white">
   <div class="inner reveal">
@@ -355,7 +347,7 @@ canvas{display:none}
     review:function(s,c){
       var t=cap(s.n);
       return {plain:t+": 10/10. "+cap(c)+". Still 10/10.",
-              html:'<span class="subj">'+esc(t)+'</span>: <span class="score">10/10</span>. '+
+              html:'<span class="subj">'+esc(t)+'</span>: <span class="score">10/10</span>. <br>'+
                    '<span class="but">'+esc(cap(c))+'</span>. Still <span class="score">10/10</span>.'};
     },
     still:function(s,c){
@@ -377,7 +369,7 @@ canvas{display:none}
 
   var rateEl=document.getElementById("rate"), toastEl=document.getElementById("toast"),
       ownIn=document.getElementById("ownIn");
-  var fmt="but", current="", lastClause="";
+  var fmt="review", current="", lastClause="";   /* score-first by default */
   var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){
@@ -548,23 +540,6 @@ canvas{display:none}
       render(ownIn.value.trim()||null);
     });
   });
-
-  /* ---- ticker strip ---- */
-  (function(){
-    var strip=document.getElementById("strip"); if(!strip) return;
-    var keep=fmt; fmt="but";
-    var lines=[],guard=0;
-    while(lines.length<14&&guard++<250){
-      var l=build(null).plain; if(lines.indexOf(l)===-1) lines.push(l);
-    }
-    fmt=keep; lastClause="";
-    var html=lines.map(function(l){
-      var m=l.match(/^(.*?a )(10)( but )(.*)$/);
-      return m?'<span><b>'+esc(m[1])+'10</b>'+esc(m[3])+'<i>'+esc(m[4])+'</i></span>'
-              :'<span>'+esc(l)+'</span>';
-    }).join("");
-    strip.innerHTML=html+html;
-  })();
 
   /* ---- reveals ---- */
   (function(){
