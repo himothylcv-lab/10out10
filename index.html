@@ -1,18 +1,19 @@
-<title>10 out of 10</title>
-<meta name="description" content="Everything gets a score. This is the only 10. $10/10 on Base.">
+<title>10/10</title>
+<meta name="description" content="EVERYTHING IS 10/10. The internet's favorite rating just became a coin. $10/10 on Base.">
 
 <style>
 /* ============================================================================
-   10/10 — a scoring machine, not a brochure.
+   10/10 — a meme that accidentally became a crypto brand.
 
-   Direction: the banner idea scaled to a whole page. A field of scores, almost
-   all of them bad, and one 10 that dominates. Base blue is the GROUND, not a
-   trim colour — on Base the blue is the identity. Amber is the only other
-   colour and it only ever marks a deduction.
+   The wordmark IS the logo: "10/10" set enormous. No mascot, no illustration,
+   nothing anyone has to redraw — which is exactly why it can spread. Anybody
+   can type it.
 
-   Layout is full-bleed alternating blocks rather than a contained sheet: the
-   previous version was a quiet editorial page, the wrong register for a
-   memecoin. Type is set larger and heavier than is comfortable, on purpose.
+   Base blue is the ground because on Base the blue is the identity. Amber is
+   the only other colour and it always means the rating itself.
+
+   Nothing on this page ever scores below 10/10. That is the whole joke: a rug
+   and a 4x get the same verdict.
    ========================================================================== */
 
 :root{
@@ -20,125 +21,149 @@
   --white:#FFFFFF;
   --amber:#FFD24A;
   --ink:#06070A;
-
   --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --pad:clamp(18px,5vw,72px);
-  --max:1200px;
+  --max:1240px;
 }
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;font-family:var(--sans);background:var(--blue);color:var(--white);
      -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5;overflow-x:hidden}
 
-.block{padding:clamp(46px,8vw,104px) var(--pad);position:relative}
-.block-blue{background:var(--blue);color:var(--white)}
-.block-white{background:var(--white);color:var(--ink)}
+.block{padding:clamp(52px,8vw,110px) var(--pad);position:relative}
+.blue{background:var(--blue);color:var(--white)}
+.white{background:var(--white);color:var(--ink)}
 .inner{max-width:var(--max);margin:0 auto;position:relative;z-index:2}
+h1,h2{margin:0;font-weight:400}
 
-h1,h2{margin:0;font-weight:400;text-wrap:balance}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
-         text-transform:uppercase;opacity:.6;margin-bottom:18px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+         text-transform:uppercase;opacity:.62;margin-bottom:16px}
 
-/* ---------- hero ---------- */
-.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;
-      overflow:hidden;padding-top:clamp(78px,10vw,118px)}
-.field{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.17}
-.field svg{width:100%;height:100%;display:block}
-/* Scrim: the field is texture, not competition. Without this the amber
-   deduction sits on top of outlined numerals and stops being readable. */
-.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(100deg,var(--blue) 0%,var(--blue) 34%,
-             rgba(0,82,255,.86) 52%,rgba(0,82,255,.55) 72%,rgba(0,82,255,.30) 100%)}
-
-.topbar{position:absolute;top:0;left:0;right:0;z-index:3;
-        padding:20px var(--pad);display:flex;align-items:center;gap:14px}
-.topbar svg{width:44px;height:44px;flex:none}
-.topbar .nm{font-size:17px;letter-spacing:-.02em}
+/* ---------------- top bar ---------------- */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:5;padding:18px var(--pad);
+        display:flex;align-items:center;gap:12px}
+.topbar svg{width:40px;height:40px;flex:none}
 .topbar .tk{margin-left:auto;font-family:var(--mono);font-size:11.5px;
-            letter-spacing:.12em;opacity:.72}
+            letter-spacing:.14em;opacity:.75}
 
-.huge{font-size:clamp(46px,10.5vw,140px);line-height:.88;letter-spacing:-.05em;
-      font-weight:300;margin:0 0 clamp(26px,4vw,46px)}
-.huge b{font-weight:700}
+/* ---------------- hero ---------------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:center;text-align:center;overflow:hidden;
+      padding-top:clamp(84px,11vw,130px);padding-bottom:clamp(48px,7vw,90px)}
+.field{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.14}
+.field svg{width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 78% 62% at 50% 46%,
+             var(--blue) 0%,var(--blue) 40%,rgba(0,82,255,.72) 68%,rgba(0,82,255,.30) 100%)}
 
-.rate{font-size:clamp(22px,4.2vw,50px);line-height:1.18;letter-spacing:-.025em;
-      font-weight:300;min-height:2.6em;margin:0}
+/* the wordmark, treated as a graphic rather than a heading */
+.icon{font-size:clamp(96px,25vw,380px);line-height:.8;letter-spacing:-.055em;
+      font-weight:700;display:block;margin:0 0 clamp(16px,2.4vw,30px);
+      animation:pop .8s cubic-bezier(.16,1.1,.3,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+
+.everything{font-size:clamp(21px,4.6vw,62px);line-height:1;letter-spacing:.02em;
+            font-weight:700;text-transform:uppercase;margin:0 0 clamp(16px,2vw,24px)}
+.everything b{color:var(--amber);font-weight:700}
+.tagline{font-size:clamp(15px,1.9vw,21px);opacity:.82;max-width:34ch;
+         margin:0 auto clamp(28px,4vw,44px);line-height:1.45}
+
+.ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:var(--sans);font-size:clamp(14px,1.5vw,17px);font-weight:700;
+     letter-spacing:-.01em;border-radius:999px;cursor:pointer;
+     padding:clamp(14px,1.7vw,19px) clamp(26px,3.4vw,44px);
+     border:2px solid var(--amber);background:var(--amber);color:var(--ink);
+     text-decoration:none;display:inline-block;
+     transition:transform .12s ease,background .15s ease,color .15s ease}
+.btn:hover{transform:translateY(-3px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.alt{background:transparent;color:var(--white);border-color:var(--white)}
+.btn.alt:hover{background:var(--white);color:var(--blue)}
+.btn:focus-visible{outline:3px solid var(--white);outline-offset:4px}
+
+/* ---------------- phrase band ---------------- */
+.band{background:var(--amber);color:var(--ink);overflow:hidden;
+      padding:16px 0;border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)}
+.band-in{display:flex;width:max-content;animation:slide 62s linear infinite}
+.band:hover .band-in{animation-play-state:paused}
+.band span{font-size:clamp(16px,2vw,24px);font-weight:700;white-space:nowrap;
+           padding:0 22px;text-transform:uppercase;letter-spacing:-.01em}
+.band span::after{content:"\2605";margin-left:22px;opacity:.42}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------------- generator ---------------- */
+.gen h2{font-size:clamp(30px,5.4vw,68px);line-height:1;letter-spacing:-.04em;
+        font-weight:700;margin:0 0 clamp(22px,3vw,34px)}
+.gen h2 b{color:var(--amber)}
+.rate{font-size:clamp(21px,3.6vw,44px);line-height:1.2;letter-spacing:-.025em;
+      font-weight:300;min-height:2.4em;margin:0}
 .rate .subj{font-weight:700}
-/* The score carries the amber, not the deduction. The coin is named for the
-   10, so the 10 is what should catch the eye — colouring the flaw instead made
-   the page about the "but". */
-.rate .score{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;
-             color:var(--amber);letter-spacing:-.02em}
-.rate .but{color:var(--white);opacity:.82}
-.rate .word{font-weight:700;letter-spacing:.01em}
-.rate w{display:inline-block;opacity:0;
-        animation:word .34s cubic-bezier(.2,.7,.2,1) forwards}
+.rate .score{font-family:var(--mono);font-weight:700;color:var(--amber);
+             letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rate .word{font-weight:700}
+.rate .flat{opacity:.84}
+.rate w{display:inline-block;opacity:0;animation:word .32s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes word{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ---------- controls ---------- */
-.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(24px,3.5vw,38px)}
-button{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:-.01em;
-       border-radius:999px;cursor:pointer;padding:14px 26px;border:2px solid var(--white);
-       background:var(--white);color:var(--blue);
-       transition:transform .12s ease,background .14s ease,color .14s ease}
-button:hover{transform:translateY(-2px)}
-button:active{transform:translateY(0) scale(.98)}
-button.ghost{background:transparent;color:var(--white)}
-button.ghost:hover{background:var(--white);color:var(--blue)}
-button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(22px,3vw,34px)}
+button.sm{font-family:var(--sans);font-size:14px;font-weight:700;border-radius:999px;
+          cursor:pointer;padding:13px 24px;border:2px solid var(--white);
+          background:var(--white);color:var(--blue);transition:transform .12s ease}
+button.sm:hover{transform:translateY(-2px)}
+button.sm.ghost{background:transparent;color:var(--white)}
+button.sm.ghost:hover{background:var(--white);color:var(--blue)}
+button.sm:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 
-.own{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;max-width:640px}
+.own{display:flex;gap:10px;margin-top:13px;flex-wrap:wrap;max-width:640px}
 .own input{flex:1;min-width:200px;font-family:var(--sans);font-size:16px;font-weight:500;
            color:var(--white);background:rgba(255,255,255,.13);
            border:2px solid rgba(255,255,255,.34);padding:13px 20px;border-radius:999px}
-.own input::placeholder{color:rgba(255,255,255,.62);font-weight:400}
+.own input::placeholder{color:rgba(255,255,255,.6);font-weight:400}
 .own input:focus{outline:none;border-color:var(--white);background:rgba(255,255,255,.2)}
 
-.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}
 .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
       padding:9px 15px;border-radius:999px;border:1.5px solid rgba(255,255,255,.36);
-      background:transparent;color:rgba(255,255,255,.78);font-weight:400}
-.chip:hover{transform:none;border-color:var(--white);color:var(--white);background:transparent}
+      background:transparent;color:rgba(255,255,255,.78);cursor:pointer}
+.chip:hover{border-color:var(--white);color:var(--white)}
 .chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);
                            color:var(--ink);font-weight:700}
 
-/* ---------- statement ---------- */
-.statement{font-size:clamp(28px,5.6vw,72px);line-height:1.04;letter-spacing:-.04em;
-           font-weight:300;max-width:17ch}
-.statement em{font-style:normal;font-weight:700;color:var(--blue)}
-.sub{margin-top:clamp(22px,3vw,34px);font-size:clamp(16px,1.8vw,19px);
-     line-height:1.55;max-width:54ch;opacity:.72}
+/* ---------------- statement ---------------- */
+.statement{font-size:clamp(32px,6.4vw,86px);line-height:1;letter-spacing:-.045em;
+           font-weight:700;max-width:15ch}
+.statement em{font-style:normal;color:var(--blue)}
+.sub{margin-top:clamp(20px,2.6vw,30px);font-size:clamp(16px,1.8vw,19px);
+     line-height:1.55;max-width:52ch;opacity:.72}
 
-/* ---------- buy ---------- */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));
-       gap:2px;margin-top:34px;background:rgba(255,255,255,.22)}
-.step{background:var(--blue);padding:28px 24px 34px}
-.step .n{font-family:var(--mono);font-size:42px;font-weight:700;line-height:1;
-         color:var(--amber);display:block;margin-bottom:14px}
+/* ---------------- buy ---------------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));
+       gap:2px;margin-top:32px;background:rgba(255,255,255,.22)}
+.step{background:var(--blue);padding:26px 22px 32px}
+.step .n{font-family:var(--mono);font-size:40px;font-weight:700;line-height:1;
+         color:var(--amber);display:block;margin-bottom:12px}
 .step p{margin:0;font-size:16px;line-height:1.45}
 
-.ca{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px;
+.ca{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px;
     background:var(--ink);padding:16px 20px;border-radius:14px}
 .ca code{font-family:var(--mono);font-size:13px;word-break:break-all;flex:1;
          min-width:190px;color:var(--white);opacity:.9}
-.ca button{padding:10px 20px;font-size:13px}
 
-/* ---------- links ---------- */
 .links{display:flex;flex-wrap:wrap;gap:11px}
-.links a{font-size:16px;font-weight:700;text-decoration:none;color:var(--ink);
-         background:var(--amber);padding:15px 30px;border-radius:999px;
+.links a{font-size:16px;font-weight:700;text-decoration:none;color:var(--white);
+         background:var(--blue);padding:15px 30px;border-radius:999px;
          transition:transform .12s ease}
 .links a:hover{transform:translateY(-2px)}
-.links a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.links a:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 
-footer{background:var(--ink);color:rgba(255,255,255,.5);padding:26px var(--pad) 46px;
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:26px var(--pad) 48px;
        font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 footer .inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 canvas{display:none}
-.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);
        background:var(--amber);color:var(--ink);font-size:14px;font-weight:700;
        padding:13px 24px;border-radius:999px;opacity:0;pointer-events:none;
        transition:opacity .18s ease,transform .18s ease;z-index:99}
@@ -150,64 +175,79 @@ canvas{display:none}
 
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
-  .rate w{opacity:1;transform:none}
-  .reveal{opacity:1;transform:none}
+  .icon,.rate w,.reveal{opacity:1;transform:none}
 }
 </style>
 
-<section class="block block-blue hero">
+<div class="topbar">
+  <svg viewBox="0 0 100 100" role="img" aria-label="10/10">
+    <circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="3.4"/>
+    <text x="50" y="59.5" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
+          font-size="27" font-weight="500" fill="currentColor" text-anchor="middle">10/10</text>
+  </svg>
+  <span class="tk" id="tk">$10/10 &middot; BASE</span>
+</div>
+
+<section class="block blue hero">
   <div class="field" aria-hidden="true"><svg id="fieldSvg" preserveAspectRatio="xMidYMid slice"></svg></div>
-
-  <div class="topbar">
-    <svg viewBox="0 0 100 100" role="img" aria-label="10 out of 10">
-      <circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="3"/>
-      <text x="50" y="59.5" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-            font-size="27" font-weight="400" fill="currentColor" text-anchor="middle">10/10</text>
-    </svg>
-    <span class="nm">10 out of 10</span>
-    <span class="tk" id="tk">$10/10 &middot; BASE</span>
-  </div>
-
   <div class="inner">
-    <h1 class="huge">Everything is<br><b>10/10.</b><br>No exceptions.</h1>
+    <h1 class="icon">10/10</h1>
+    <p class="everything">Everything is <b>10/10</b></p>
+    <p class="tagline">The internet's favorite rating just became a coin.</p>
+    <div class="ctas">
+      <a class="btn" id="buyBtn" href="#buy">Buy $10/10</a>
+      <a class="btn alt" id="postBtn" href="#" rel="noopener">Post 10/10</a>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"><div class="band-in" id="band"></div></div>
+
+<section class="block blue gen">
+  <div class="inner reveal">
+    <div class="eyebrow">CT's favorite rating</div>
+    <h2>Rate it. <b>10/10.</b></h2>
 
     <p class="rate" id="rate" aria-live="polite"></p>
 
     <div class="row">
-      <button id="roll">New rating</button>
-      <button class="ghost" id="copyLine">Copy</button>
-      <button class="ghost" id="saveCard">Save image</button>
+      <button class="sm" id="roll">New one</button>
+      <button class="sm ghost" id="copyLine">Copy</button>
+      <button class="sm ghost" id="postLine">Post it</button>
+      <button class="sm ghost" id="saveCard">Save image</button>
     </div>
 
     <div class="own">
       <label for="ownIn" style="position:absolute;left:-9999px">Rate anything</label>
-      <input id="ownIn" type="text" maxlength="42" autocomplete="off" spellcheck="false"
-             placeholder="Rate anything &mdash; a name, a coin, your bags">
-      <button id="ownGo">Rate it</button>
+      <input id="ownIn" type="text" maxlength="46" autocomplete="off" spellcheck="false"
+             placeholder="Rate anything &mdash; you already know the rating">
+      <button class="sm" id="ownGo">Rate it</button>
     </div>
 
-    <div class="chips" role="group" aria-label="Post format">
+    <div class="chips" role="group" aria-label="Format">
       <button class="chip" data-fmt="verdict" aria-pressed="true">10/10</button>
       <button class="chip" data-fmt="still" aria-pressed="false">still 10/10</button>
       <button class="chip" data-fmt="notes" aria-pressed="false">no notes</button>
       <button class="chip" data-fmt="oneword" aria-pressed="false">one word</button>
+      <button class="chip" data-fmt="ser" aria-pressed="false">ser</button>
     </div>
   </div>
 </section>
 
-<section class="block block-white">
+<section class="block white">
   <div class="inner reveal">
-    <div class="eyebrow" style="color:var(--blue);opacity:1">The point</div>
-    <h2 class="statement"><em>Still 10/10.</em> Whatever comes after it.</h2>
-    <p class="sub">He sold at 2x. The liquidity is four hundred dollars. The dev wallet
-      moved an hour ago. None of it moves the number. The score gets set once and it
-      stays there &mdash; that is the entire product.</p>
+    <div class="eyebrow" style="color:var(--blue);opacity:1">The only rating that matters</div>
+    <h2 class="statement">You already know the <em>rating</em>.</h2>
+    <p class="sub">Chart up? 10/10. Chart down? 10/10. Rugged in nine minutes? Still 10/10.
+      The score was never up for debate &mdash; that's the point. Nothing less than 10/10,
+      ever, for anything.</p>
   </div>
 </section>
 
-<section class="block block-blue">
+<section class="block blue" id="buy">
   <div class="inner reveal">
-    <div class="eyebrow">How to buy</div>
+    <div class="eyebrow">10/10 or nothing</div>
+    <h2 style="font-size:clamp(28px,4.6vw,56px);letter-spacing:-.04em;font-weight:700">How to buy</h2>
     <div class="steps">
       <div class="step"><span class="n">1</span>
         <p>Install <strong>Coinbase Wallet</strong>, <strong>Rainbow</strong> or <strong>MetaMask</strong>.</p></div>
@@ -216,18 +256,18 @@ canvas{display:none}
       <div class="step"><span class="n">3</span>
         <p>Open <strong>Uniswap</strong> or <strong>Aerodrome</strong> and paste the address.</p></div>
       <div class="step"><span class="n">4</span>
-        <p>Swap. Then rate it yourself.</p></div>
+        <p>Swap. Then go post 10/10.</p></div>
     </div>
     <div class="ca">
       <code id="ca">CONTRACT ADDRESS &mdash; PASTE AFTER LAUNCH</code>
-      <button id="copyCa">Copy</button>
+      <button class="sm" id="copyCa">Copy</button>
     </div>
   </div>
 </section>
 
-<section class="block block-white">
+<section class="block white">
   <div class="inner reveal">
-    <div class="eyebrow" style="color:var(--blue);opacity:1">Find it</div>
+    <div class="eyebrow" style="color:var(--blue);opacity:1">Ser, this is 10/10</div>
     <div class="links">
       <a href="#" id="lx" rel="noopener">X</a>
       <a href="#" id="lds" rel="noopener">DEX Screener</a>
@@ -237,8 +277,8 @@ canvas{display:none}
 </section>
 
 <footer><div class="inner">
-  <span>10 OUT OF 10</span>
-  <span>A MEMECOIN ON BASE. NO UTILITY. NO PROMISES.</span>
+  <span>10/10</span>
+  <span>A MEMECOIN ON BASE. NO UTILITY. NO PROMISES. 10/10.</span>
 </div></footer>
 
 <canvas id="card" width="1200" height="675"></canvas>
@@ -250,64 +290,37 @@ canvas{display:none}
 
   /* ============ EDIT AFTER LAUNCH ============ */
   var CONFIG = {
-    ticker:"$10/10", contract:"",
+    ticker:"$10/10",
+    contract:"",                      // paste the Base token address
     x:"https://x.com/10out10onX",
     site:"10out10.fun"
   };
-
-  /* TRENDING — the trend valve. Paste a new flaw here when a meta appears and
-     it enters rotation immediately. Lowercase, no trailing period. */
-  var TRENDING = [
-    "it was deployed by tagging a bot on Farcaster",
-    "the whole float is the dev's mutuals",
-    "it's a Clanker deploy with a new picture",
-    "the airdrop went to people who sell airdrops",
-    "the KOL posted it after his own entry",
-    "gas was cheaper than the position"
-  ];
   /* =========================================== */
 
-  /* ---------------------------------------------------------------------
-     Checked against the live X feed: the phrase is SHORT, it goes at the END,
-     and there is no caveat clause. Nobody posts "she's a 10 but" any more.
+  var PHRASES = [
+    "Everything is 10/10","Rate it. 10/10.","Nothing less than 10/10",
+    "CT's favorite rating","Post 10/10","You already know the rating",
+    "10/10 or nothing","The only rating that matters","Ser, this is 10/10"
+  ];
 
-     And the score never moves. Every single output is 10/10 — that is the
-     coin. Rating a rug 10/10 is the joke; scoring it 0/10 would just make this
-     a review site. In crypto people already type "10/10" when a chart rips,
-     so every post says the ticker for free.
-     --------------------------------------------------------------------- */
-
+  /* Nothing here ever scores below 10/10 — a rug and a 4x get the same
+     verdict, and that IS the joke. Situations are short because the live
+     usage is short: the thing, then the rating, full stop. */
   var SITUATIONS = [
-    "up 4x before lunch",
-    "chart went vertical out of nowhere",
-    "entry filled on the wick",
-    "made rent on a Tuesday",
-    "green candle, no news, no reason",
-    "called it and actually posted the entry",
-    "sold the top for once",
-    "bought it before the KOL did",
-    "still up after the dump",
-    "took profit and slept fine",
-    "the whole timeline is posting it",
-    "up on the day, down on the week",
-    "sideways for nine hours",
-    "bought the top again",
-    "sold at 2x and it did 40",
-    "aped it off one tweet",
-    "gas cost more than the position",
-    "bridged to the wrong chain",
-    "the dev wallet moved",
-    "liquidity is four hundred dollars",
-    "top holder owns ninety percent",
-    "rugged in nine minutes",
-    "the KOL posted it after his own entry",
-    "still holding from last cycle",
-    "up on paper and nowhere else",
-    "the audit was the dev's cousin",
-    "bubblemaps looks like a family reunion",
-    "deployed by tagging a bot on Farcaster",
-    "the whole float is the dev's mutuals",
-    "lost the seed phrase",
+    "up 4x before lunch","chart went vertical out of nowhere",
+    "entry filled on the wick","made rent on a Tuesday",
+    "green candle, no news, no reason","called it and actually posted the entry",
+    "sold the top for once","bought it before the KOL did",
+    "still up after the dump","took profit and slept fine",
+    "the whole timeline is posting it","up on the day, down on the week",
+    "sideways for nine hours","bought the top again",
+    "sold at 2x and it did 40","aped it off one tweet",
+    "gas cost more than the position","bridged to the wrong chain",
+    "the dev wallet moved","liquidity is four hundred dollars",
+    "top holder owns ninety percent","rugged in nine minutes",
+    "the KOL posted it after his own entry","still holding from last cycle",
+    "up on paper and nowhere else","the audit was the dev's cousin",
+    "bubblemaps looks like a family reunion","lost the seed phrase",
     "the telegram is nine hundred bots and one mod",
     "sold the bottom and bought it back higher"
   ];
@@ -320,58 +333,54 @@ canvas{display:none}
     "Base was up and everything else wasn't"
   ];
 
-  /* Always positive — the score never moves, so the word never sours. */
   var WORDS = ["BANGER","NO NOTES","PERFECT","FLAWLESS","CINEMA",
                "MASTERPIECE","IMMACULATE","CHEF'S KISS"];
 
-  function sc(t){ return '<span class="score">'+(t||"10/10")+'</span>'; }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+    return c==="&"?"&amp;":c==="<"?"&lt;":c===">"?"&gt;":"&quot;";});}
+  function cap(s){s=String(s);return s.charAt(0).toUpperCase()+s.slice(1);}
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function sc(t){return '<span class="score">'+(t||"10/10")+'</span>';}
 
   var FORMATS = {
-    /* the dominant live shape: statement, then the score, full stop */
     verdict:function(t){
       return {plain:cap(t)+". 10/10",
               html:'<span class="subj">'+esc(cap(t))+'</span>. '+sc()};
     },
-    /* score plus one shouted word — the rating-list shape */
-    oneword:function(t){
-      var w=pick(WORDS);
-      return {plain:"10/10 "+w+". "+cap(t)+".",
-              html:sc()+' <span class="word">'+esc(w)+'</span>. '+
-                   '<span class="but">'+esc(cap(t))+'</span>.'};
-    },
-    /* the punchline of the whole coin: the flaw changes nothing */
     still:function(t){
       return {plain:cap(t)+". Still 10/10.",
               html:'<span class="subj">'+esc(cap(t))+'</span>. Still '+sc()+'.'};
     },
-    /* no caveat at all — the shortest possible post */
     notes:function(t){
       return {plain:cap(t)+". 10/10, no notes.",
               html:'<span class="subj">'+esc(cap(t))+'</span>. '+sc()+', no notes.'};
+    },
+    oneword:function(t){
+      var w=pick(WORDS);
+      return {plain:"10/10 "+w+". "+cap(t)+".",
+              html:sc()+' <span class="word">'+esc(w)+'</span>. '+
+                   '<span class="flat">'+esc(cap(t))+'</span>.'};
+    },
+    ser:function(t){
+      return {plain:"Ser, "+t+". 10/10.",
+              html:'Ser, <span class="subj">'+esc(t)+'</span>. '+sc()+'.'};
     }
   };
 
+  var rateEl=document.getElementById("rate"), toastEl=document.getElementById("toast"),
+      ownIn=document.getElementById("ownIn");
+  var fmt="verdict", current="", last="";
+  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function build(own){
     if(own) return FORMATS[fmt](own);
-    var pool = SITUATIONS.concat(TRENDING);
-    var t = pick(pool), guard=0;
-    while(t===lastClause && guard++<12) t = pick(pool);
-    lastClause = t;
+    var pool=SITUATIONS.concat(TRENDING), t=pick(pool), g=0;
+    while(t===last && g++<12) t=pick(pool);
+    last=t;
     return FORMATS[fmt](t);
   }
 
-  var rateEl=document.getElementById("rate"), toastEl=document.getElementById("toast"),
-      ownIn=document.getElementById("ownIn");
-  var fmt="verdict", current="", lastClause="";
-  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
-    return c==="&"?"&amp;":c==="<"?"&lt;":c===">"?"&gt;":"&quot;";});}
-  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-  function pick(a){return a[Math.floor(Math.random()*a.length)];}
-
-
-  /* words land in sequence; .score is skipped so the count-up can own it */
+  /* words land in sequence; .score is skipped so nothing fights over it */
   function stagger(root){
     var i=0;
     (function walk(node){
@@ -385,30 +394,25 @@ canvas{display:none}
           if(!parts[j]) continue;
           if(/^\s+$/.test(parts[j])){frag.appendChild(document.createTextNode(parts[j]));continue;}
           var w=document.createElement("w"); w.textContent=parts[j];
-          w.style.animationDelay=(i++*38)+"ms"; frag.appendChild(w);
+          w.style.animationDelay=(i++*36)+"ms"; frag.appendChild(w);
         }
         node.replaceChild(frag,n);
       }
     })(root);
   }
 
-  function countScores(root){
-    Array.prototype.forEach.call(root.querySelectorAll(".score"),function(el){
-      if(el.textContent.trim()!=="10") return;
-      var start=null,dur=950; el.textContent="1";
-      function step(t){
-        if(start===null) start=t;
-        var p=Math.min(1,(t-start)/dur), e=1-Math.pow(1-p,3);
-        el.textContent=String(Math.max(1,Math.round(e*10)));
-        if(p<1) requestAnimationFrame(step); else el.textContent="10";
-      }
-      requestAnimationFrame(step);
-    });
+  function intent(text){
+    return "https://x.com/intent/post?text="+encodeURIComponent(text);
+  }
+  function syncPost(){
+    document.getElementById("postLine")
+      .setAttribute("data-href", intent((current?current+"\n\n":"")+"$10/10"));
   }
 
   function render(own){
     var r=build(own); current=r.plain; rateEl.innerHTML=r.html;
-    if(!reduced){ stagger(rateEl); countScores(rateEl); }
+    if(!reduced) stagger(rateEl);
+    syncPost();
   }
 
   function toast(m){
@@ -429,42 +433,40 @@ canvas{display:none}
     document.body.removeChild(a);
   }
 
-  /* ---- the score field: the page's one big visual idea ----
-     Almost every score is bad. One is a 10 — the logo in the corner. Drawn in
-     SVG rather than shipped as an image so it reflows and costs nothing. */
-  (function drawField(){
-    var svg=document.getElementById("fieldSvg");
-    if(!svg) return;
-    var W=1400,H=900,out=[],seed=7;
-    function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
-    for(var gx=0;gx<12;gx++){
-      for(var gy=0;gy<7;gy++){
-        var cx=70+gx*118+(rnd()*34-17), cy=64+gy*128+(rnd()*30-15);
-        var r=20+rnd()*16;
-        out.push('<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="'+r.toFixed(1)+
-                 '" fill="none" stroke="#fff" stroke-width="1.5"/>'+
-                 '<text x="'+cx.toFixed(1)+'" y="'+(cy+r*0.35).toFixed(1)+
-                 '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="'+
-                 (r*0.62).toFixed(1)+'" font-weight="300" fill="#fff" text-anchor="middle">10/10</text>');
-      }
+  /* ---- the field: a wall of 10/10s ---- */
+  (function(){
+    var svg=document.getElementById("fieldSvg"); if(!svg) return;
+    var W=1500,H=950,out=[],seed=7;
+    function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+    for(var gx=0;gx<11;gx++) for(var gy=0;gy<7;gy++){
+      var cx=80+gx*136+(rnd()*36-18), cy=70+gy*132+(rnd()*30-15), r=24+rnd()*16;
+      out.push('<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="'+r.toFixed(1)+
+               '" fill="none" stroke="#fff" stroke-width="1.6"/>'+
+               '<text x="'+cx.toFixed(1)+'" y="'+(cy+r*0.22).toFixed(1)+
+               '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="'+
+               (r*0.62).toFixed(1)+'" font-weight="500" fill="#fff" text-anchor="middle">10/10</text>');
     }
     svg.setAttribute("viewBox","0 0 "+W+" "+H);
     svg.innerHTML=out.join("");
   })();
 
-  /* ---- shareable card: always Base blue, never the viewer's theme ---- */
+  /* ---- phrase band ---- */
+  (function(){
+    var b=document.getElementById("band"); if(!b) return;
+    var html=PHRASES.map(function(p){return '<span>'+esc(p)+'</span>';}).join("");
+    b.innerHTML=html+html;
+  })();
+
+  /* ---- shareable card: always Base blue ---- */
   function drawCard(){
     var c=document.getElementById("card"), x=c.getContext("2d");
     var W=c.width,H=c.height,M=92;
     x.fillStyle="#0052FF"; x.fillRect(0,0,W,H);
-    x.strokeStyle="#FFFFFF"; x.lineWidth=3;
-    x.beginPath(); x.arc(M+40,M+18,40,0,Math.PI*2); x.stroke();
     x.fillStyle="#FFFFFF";
-    x.font='400 25px "Helvetica Neue",Helvetica,Arial,sans-serif';
-    x.textAlign="center"; x.textBaseline="middle";
-    x.fillText("10/10",M+40,M+19);
-
+    x.font='700 46px "Helvetica Neue",Helvetica,Arial,sans-serif';
     x.textAlign="left"; x.textBaseline="alphabetic";
+    x.fillText("10/10",M,M+40);
+
     var size=current.length>118?40:current.length>78?47:56;
     x.font='300 '+size+'px "Helvetica Neue",Helvetica,Arial,sans-serif';
     var words=current.split(" "),line="",lines=[],maxW=W-M*2;
@@ -474,8 +476,7 @@ canvas{display:none}
     }
     if(line) lines.push(line);
     lines=lines.slice(0,5);
-    var lh=size*1.24, y=M+132+lh;
-    x.fillStyle="#FFFFFF";
+    var lh=size*1.24, y=M+150+lh;
     for(var j=0;j<lines.length;j++) x.fillText(lines[j],M,y+j*lh);
 
     x.strokeStyle="rgba(255,255,255,.34)"; x.lineWidth=1;
@@ -491,7 +492,7 @@ canvas{display:none}
     c.toBlob(function(b){
       if(!b){toast("Could not build the image");return;}
       var u=URL.createObjectURL(b),a=document.createElement("a");
-      a.href=u;a.download="10outof10.png";
+      a.href=u;a.download="10out10.png";
       document.body.appendChild(a);a.click();document.body.removeChild(a);
       setTimeout(function(){URL.revokeObjectURL(u);},1200);
       toast("Image saved");
@@ -505,8 +506,21 @@ canvas{display:none}
   document.getElementById("lds").href=ca?"https://dexscreener.com/base/"+ca:"https://dexscreener.com/base";
   document.getElementById("lpf").href=ca?"https://basescan.org/token/"+ca:"https://basescan.org";
   document.getElementById("lx").href=CONFIG.x;
+  /* Until the token exists there is nothing to swap, so Buy scrolls to the
+     instructions rather than dumping someone on an empty Uniswap page. */
+  if(ca) document.getElementById("buyBtn").href=
+    "https://app.uniswap.org/swap?chain=base&outputCurrency="+ca;
 
-  /* ---- events ---- */
+  document.getElementById("postBtn").addEventListener("click",function(e){
+    e.preventDefault();
+    window.open(intent("Everything is 10/10\n\n$10/10 on Base\n"+CONFIG.site),
+                "_blank","noopener");
+  });
+  document.getElementById("postLine").addEventListener("click",function(e){
+    e.preventDefault();
+    window.open(this.getAttribute("data-href")||intent("$10/10"),"_blank","noopener");
+  });
+
   document.getElementById("roll").addEventListener("click",function(){render(ownIn.value.trim()||null);});
   document.getElementById("copyLine").addEventListener("click",function(){copy(current,"Copied — go post it");});
   document.getElementById("saveCard").addEventListener("click",saveCard);
@@ -529,7 +543,7 @@ canvas{display:none}
       Array.prototype.forEach.call(els,function(e){e.classList.add("seen");}); return;
     }
     var io=new IntersectionObserver(function(en){
-      en.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target);} });
+      en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target);}});
     },{rootMargin:"0px 0px -10% 0px",threshold:.06});
     Array.prototype.forEach.call(els,function(e){io.observe(e);});
   })();
