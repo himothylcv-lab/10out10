@@ -168,12 +168,6 @@ button.sm:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .ca code{font-family:var(--mono);font-size:13px;word-break:break-all;flex:1;
          min-width:190px;color:var(--white);opacity:.9}
 
-.links{display:flex;flex-wrap:wrap;gap:11px}
-.links a{font-size:16px;font-weight:700;text-decoration:none;color:var(--white);
-         background:var(--blue);padding:15px 30px;border-radius:999px;
-         transition:transform .12s ease}
-.links a:hover{transform:translateY(-2px)}
-.links a:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 
 footer{background:var(--ink);color:rgba(255,255,255,.5);padding:26px var(--pad) 48px;
        font-family:var(--mono);font-size:11px;letter-spacing:.06em}
@@ -183,7 +177,7 @@ footer .inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
    "built on" Base rather than anything implying a partnership, and that the
    mark stays black, white or blue — hence white here, inheriting the footer
    colour so hover brightens mark and label together. */
-footer .attrib{justify-content:flex-start;align-items:center;gap:32px;
+footer .attrib{justify-content:space-between;align-items:center;gap:20px 32px;
        padding-bottom:20px;margin-bottom:20px;
        border-bottom:1px solid rgba(255,255,255,.10)}
 .attrib a{display:inline-flex;align-items:center;gap:10px;
@@ -193,6 +187,13 @@ footer .attrib{justify-content:flex-start;align-items:center;gap:32px;
 .attrib .lg-base{height:14px;width:auto;display:block}
 .attrib img{height:18px;width:18px;display:block;opacity:.72;transition:opacity .18s}
 .attrib a:hover img{opacity:1}
+/* the go-look-elsewhere links, same register as the attribution beside them */
+.flinks{display:flex;align-items:center;gap:22px;margin-left:auto}
+.flinks a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .18s}
+.flinks a:hover,.flinks a:focus-visible{color:#fff}
+.flinks a:focus-visible{outline:2px solid var(--amber);outline-offset:4px;border-radius:3px}
+.flinks a.soon{color:rgba(255,255,255,.26);pointer-events:none}
+@media (max-width:640px){.flinks{margin-left:0;width:100%;gap:18px}}
 
 canvas{display:none}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);
@@ -315,17 +316,6 @@ canvas{display:none}
   </div>
 </section>
 
-<section class="block white">
-  <div class="inner reveal">
-    <div class="eyebrow" style="color:var(--blue);opacity:1">Ser, this is 10/10</div>
-    <div class="links">
-      <a href="#" id="lx" rel="noopener">X</a>
-      <a href="#" id="lds" rel="noopener">DEX Screener</a>
-      <a href="#" id="lpf" rel="noopener">Basescan</a>
-    </div>
-  </div>
-</section>
-
 <footer>
 <div class="inner attrib">
   <a href="https://www.base.org" target="_blank" rel="noopener noreferrer">
@@ -334,6 +324,11 @@ canvas{display:none}
     <span>LAUNCHED ON</span>
     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABP0lEQVR42u3asUrDQBjA8SCKj+AglGwOzh1E8AHcOpUunaWLU56gex+jlG4ZCt1dxE2wXaS4u4jUTeTzC3Qql5SEXJO7+3/wH3stv0Bp7y4SkSjkIgAAAAAAAAAAAAAAAHCugTY39BAKwJeY5zcUgB/JHwAAAMBvgIvdl533ACPtxdCnFI83ABupNt4AfAAAAABBAyzaBtDT3ndPpo6W2nnB+51qHS3eq98UwFzqn2uXfgkCAAAAANQ9j74ATLSTkutdaduc9V61M5cA7is+yVXBmjEAAAAAAAAAAAAAAAC0A2BmAWBdEeA75zV/NgHutCfDUVW2v5dqN1q3RMMDZ3xFAIn2bPgs4yZ2hbPNyzcLf5Vjl+4ILQAAAICgAVILAJcuAdxqUzFfXqxScozzR67KAgAAAAAAAAAAAAAQaP8ybsyc0Zy4ewAAAABJRU5ErkJggg==" alt="o1" width="16" height="16">
   </a>
+  <span class="flinks">
+    <a href="#" id="lx" rel="noopener noreferrer" target="_blank">X</a>
+    <a href="#" id="lds" rel="noopener noreferrer" target="_blank">DEX SCREENER</a>
+    <a href="#" id="lpf" rel="noopener noreferrer" target="_blank">BASESCAN</a>
+  </span>
 </div>
 <div class="inner">
   <span>10/10</span>
@@ -546,8 +541,13 @@ canvas{display:none}
   var ca=CONFIG.contract.trim();
   document.getElementById("tk").textContent=CONFIG.ticker+" · BASE";
   document.getElementById("ca").textContent=ca||"CONTRACT ADDRESS — PASTE AFTER LAUNCH";
-  document.getElementById("lds").href=ca?"https://dexscreener.com/base/"+ca:"https://dexscreener.com/base";
-  document.getElementById("lpf").href=ca?"https://basescan.org/token/"+ca:"https://basescan.org";
+  // Until the contract exists these two lead nowhere useful, so say so rather
+  // than sending people to a generic explorer page.
+  var lds=document.getElementById("lds"), lpf=document.getElementById("lpf");
+  lds.href=ca?"https://dexscreener.com/base/"+ca:"#";
+  lpf.href=ca?"https://basescan.org/token/"+ca:"#";
+  lds.classList.toggle("soon",!ca); lpf.classList.toggle("soon",!ca);
+  if(!ca){lds.removeAttribute("target");lpf.removeAttribute("target");}
   document.getElementById("lx").href=CONFIG.x;
   /* Until the token exists there is nothing to swap, so Buy scrolls to the
      instructions rather than dumping someone on an empty Uniswap page. */
