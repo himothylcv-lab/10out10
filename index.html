@@ -143,6 +143,38 @@ button.sm:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .sub{margin-top:clamp(20px,2.6vw,30px);font-size:clamp(16px,1.8vw,19px);
      line-height:1.55;max-width:52ch;opacity:.72}
 
+/* ---------------- live burn dashboard ---------------- */
+/* Reads the chain directly from the browser. balanceOf(0x...dEaD) is the
+   authoritative cumulative burn — exact, one call, no indexer and no trust in
+   anything we host. Recent burns come from a bounded log scan so the page
+   cannot get slower as history grows. */
+.dash{background:var(--ink);color:#fff;padding:clamp(26px,4vw,46px) clamp(20px,3vw,40px);
+      margin-top:clamp(20px,3vw,34px)}
+.dash-top{display:flex;align-items:baseline;justify-content:space-between;
+      flex-wrap:wrap;gap:10px;margin-bottom:clamp(18px,2.6vw,30px)}
+.dash-live{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+      text-transform:uppercase;color:rgba(255,255,255,.42);display:flex;
+      align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+      animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.dash-hero{font-size:clamp(52px,11vw,132px);line-height:.9;font-weight:700;
+      letter-spacing:-.045em;color:var(--amber)}
+.dash-hero small{display:block;font-family:var(--mono);font-size:11px;
+      letter-spacing:.08em;text-transform:uppercase;font-weight:400;
+      color:rgba(255,255,255,.45);margin-top:14px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:1px;background:rgba(255,255,255,.12);margin-top:clamp(22px,3vw,34px)}
+.dash-cell{background:var(--ink);padding:20px 18px}
+.dash-cell b{display:block;font-size:clamp(19px,2.4vw,27px);font-weight:700;
+      letter-spacing:-.02em;line-height:1.1}
+.dash-cell span{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;
+      letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.dash-cell a{color:var(--amber);text-decoration:none}
+.dash-cell a:hover{text-decoration:underline}
+.dash-note{margin-top:18px;font-family:var(--mono);font-size:10px;
+      letter-spacing:.06em;color:rgba(255,255,255,.34);line-height:1.6}
+
 /* ---------------- fee stream ---------------- */
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
       gap:2px;margin-top:clamp(26px,4vw,40px);background:rgba(255,255,255,.22)}
@@ -287,6 +319,24 @@ canvas{display:none}
       <div class="fig"><b>50%</b><span>of that comes back to the coin</span></div>
       <div class="fig"><b>97%</b><span>of that buys back and burns</span></div>
       <div class="fig"><b>0</b><span>tokens allocated to the team</span></div>
+    </div>
+
+
+    <div class="dash" id="dash">
+      <div class="dash-top">
+        <div class="dash-live"><span class="dot"></span><span id="dLive">reading base&hellip;</span></div>
+        <div class="dash-live" id="dUpd"></div>
+      </div>
+      <div class="dash-hero"><span id="dPct">&mdash;</span><small>of total supply permanently burned</small></div>
+      <div class="dash-grid">
+        <div class="dash-cell"><b id="dBurned">&mdash;</b><span>tokens burned</span></div>
+        <div class="dash-cell"><b id="dLeft">&mdash;</b><span>supply remaining</span></div>
+        <div class="dash-cell"><b id="dLast">&mdash;</b><span>last burn</span></div>
+        <div class="dash-cell"><b id="dTx">&mdash;</b><span>proof</span></div>
+      </div>
+      <p class="dash-note">Read live from Base in your browser &mdash; balanceOf(0x&hellip;dEaD)
+        and totalSupply() on the token contract. No server of ours is involved.
+        Verify it yourself on Basescan.</p>
     </div>
 
     <p class="mech">Bought from the open market and sent to the burn address,
@@ -604,6 +654,106 @@ canvas{display:none}
       en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target);}});
     },{rootMargin:"0px 0px -10% 0px",threshold:.06});
     Array.prototype.forEach.call(els,function(e){io.observe(e);});
+  })();
+
+
+  /* ---------------- live burn dashboard ----------------
+     Everything here is read straight from Base by the visitor's own browser.
+     The cumulative figure comes from balanceOf(0x...dEaD), which is exact and
+     costs one call — deliberately NOT a log scan, so the page cannot slow down
+     as burn history grows. Only the "last burn" lookup scans logs, and it is
+     bounded to a recent window. */
+  (function(){
+    var DASH_RPCS = ["https://mainnet.base.org",
+                     "https://base-rpc.publicnode.com",
+                     "https://base.drpc.org"];
+    var DEAD32 = "000000000000000000000000000000000000000000000000000000000000dead";
+    var TRANSFER = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+    var rpcIdx = 0;
+
+    function rpc(method, params){
+      var body = JSON.stringify({jsonrpc:"2.0",id:1,method:method,params:params});
+      function attempt(n){
+        if(n >= DASH_RPCS.length) return Promise.reject(new Error("all rpcs failed"));
+        var url = DASH_RPCS[(rpcIdx + n) % DASH_RPCS.length];
+        return fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:body})
+          .then(function(r){ return r.json(); })
+          .then(function(j){
+            if(j.error) throw new Error(j.error.message);
+            rpcIdx = (rpcIdx + n) % DASH_RPCS.length;   // stick with what worked
+            return j.result;
+          })
+          .catch(function(){ return attempt(n+1); });
+      }
+      return attempt(0);
+    }
+    function call(data){ return rpc("eth_call",[{to:CONFIG.contract,data:data},"latest"]); }
+    function big(hex){ return BigInt(hex && hex !== "0x" ? hex : "0x0"); }
+
+    // integer maths only — 1e27 base units overflows a double
+    function toTokens(v){ return Number(v / (10n ** 18n)); }
+    function pct(part, whole){
+      if(whole === 0n) return 0;
+      return Number((part * 1000000n) / whole) / 10000;   // 4 dp, no float error
+    }
+    function group(n){ return n.toLocaleString("en-US"); }
+    function ago(sec){
+      var d = Math.floor(Date.now()/1000) - sec;
+      if(d < 60) return d + "s ago";
+      if(d < 3600) return Math.floor(d/60) + "m ago";
+      if(d < 86400) return Math.floor(d/3600) + "h ago";
+      return Math.floor(d/86400) + "d ago";
+    }
+    function set(id, v){ var e = document.getElementById(id); if(e) e.innerHTML = v; }
+
+    function refresh(){
+      if(!CONFIG.contract){ set("dLive","not live yet"); return; }
+      Promise.all([ call("0x18160ddd"),                       // totalSupply()
+                    call("0x70a08231" + DEAD32) ])            // balanceOf(dead)
+        .then(function(r){
+          var supply = big(r[0]), burned = big(r[1]);
+          if(supply === 0n) throw new Error("no supply");
+          set("dPct", pct(burned, supply).toFixed(4) + "%");
+          set("dBurned", group(toTokens(burned)));
+          set("dLeft", group(toTokens(supply - burned)));
+          set("dLive", "live on base");
+          set("dUpd", "updated " + new Date().toLocaleTimeString());
+          return lastBurn();
+        })
+        .catch(function(){ set("dLive","chain unreachable — retrying"); });
+    }
+
+    // bounded scan: ~2 days of blocks, chunked so no single request is rejected
+    function lastBurn(){
+      return rpc("eth_blockNumber",[]).then(function(bn){
+        var latest = parseInt(bn,16), CHUNK = 40000, SPAN = 90000;
+        var from = Math.max(0, latest - SPAN), found = null;
+        function scan(start){
+          if(start > latest) return Promise.resolve(found);
+          var end = Math.min(start + CHUNK - 1, latest);
+          return rpc("eth_getLogs",[{address:CONFIG.contract,
+                     topics:[TRANSFER,null,"0x"+DEAD32],
+                     fromBlock:"0x"+start.toString(16),
+                     toBlock:"0x"+end.toString(16)}])
+            .then(function(logs){
+              if(logs && logs.length) found = logs[logs.length-1];
+              return scan(end+1);
+            })
+            .catch(function(){ return scan(end+1); });
+        }
+        return scan(from).then(function(l){
+          if(!l){ set("dLast","&mdash;"); set("dTx","&mdash;"); return; }
+          set("dTx",'<a href="https://basescan.org/tx/'+l.transactionHash+
+                    '" target="_blank" rel="noopener noreferrer">basescan &rarr;</a>');
+          return rpc("eth_getBlockByNumber",[l.blockNumber,false]).then(function(b){
+            set("dLast", b ? ago(parseInt(b.timestamp,16)) : "&mdash;");
+          });
+        });
+      });
+    }
+
+    refresh();
+    setInterval(refresh, 30000);
   })();
 
   render(null);
