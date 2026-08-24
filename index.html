@@ -564,7 +564,11 @@ canvas{display:none}
     fmt = pick(POST_FORMATS);
     var line = build(null).plain;
     fmt = keepFmt; last = keepLast;      // don't disturb what the page is showing
-    return line + "\n\n$10/10 on Base\n" + CONFIG.site;
+    // No link. X auto-links bare domains, so "10out10.fun" here would become a
+    // t.co link and take the suppressed-reach treatment — and cost 13x to post
+    // via the API ($0.20 vs $0.015). The domain lives in the bio and the pinned
+    // post, where it is a real link and costs nothing.
+    return line + "\n\n$10/10 on Base";
   }
   document.getElementById("postBtn").addEventListener("click",function(e){
     e.preventDefault();
